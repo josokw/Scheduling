@@ -9,14 +9,14 @@ class Tasks;
 class RMA
 {
 public:
-	RMA(Tasks& tasks);
-	virtual ~RMA() = default;	
-	void schedule();
+  RMA(Tasks& tasks);
+  virtual ~RMA() = default; 
+  void schedule();
 private:
-	Tasks& _tasks;
-	std::vector<std::string> _tasksDiagram;
-	bool isSchedulable();
-	void render();
+  Tasks& _tasks;
+  std::vector<std::string> _tasksDiagram;
+  bool isSchedulable();
+  void render();
 };
 
 #endif
