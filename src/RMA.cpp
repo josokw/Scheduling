@@ -1,7 +1,8 @@
 #include "Tasks.hpp"
-#include "RMA.hpp" 
+#include "RMA.hpp"
 
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <iterator>
 
@@ -15,10 +16,14 @@ RMA::RMA(Tasks& tasks)
 
 void RMA::schedule()
 {
+  cout << "       c     d     p" << endl;
   int i = 1;
   for (auto t: _tasks.getSpecs())
   {
-    cout << "T" << i << "   " << t.c << " " << t.d << " " << t.p << endl;
+    cout << "T" << i << "  "
+         << setw(4) << t.c << "  "
+         << setw(4) << t.d << "  "
+         << setw(4) << t.p << endl;
     ++i;
   }
   cout << endl;
@@ -30,23 +35,23 @@ void RMA::schedule()
   {
     cout << "Tasks are schedulable?" << endl;
   }
-  
+
   cout << "Timeslice = " << _tasks.timeslice() << "  ";
   cout << "Minorframe = " << _tasks.minorframe() << "  ";
   cout << "Majorframe = " << _tasks.majorframe() << endl;
   render();
   cout << endl;
-  
+
   vector<int> todo;
   for (const auto& t: _tasks.getSpecs())
   {
     todo.push_back(0);
   }
-  
+
   int taskIndex = 0;
   int diagramIndex = 4;
   while (diagramIndex < _tasksDiagram[0].size())
-  { 
+  {
     switch (_tasksDiagram[taskIndex][diagramIndex])
     {
       case '!':
@@ -76,15 +81,15 @@ void RMA::schedule()
       default:
         cerr << "UNKNOWN char in diagram" << endl;
     }
-    if (taskIndex >= todo.size()) 
+    if (taskIndex >= todo.size())
     {
-      taskIndex = 0; 
+      taskIndex = 0;
       ++diagramIndex;
     }
   }
   for (const auto& d: _tasksDiagram)
   {
-    cout << d << endl; 
+    cout << d << endl;
   }
   cout << endl;
 }
@@ -92,7 +97,7 @@ void RMA::schedule()
 bool RMA::isSchedulable()
 {
   double sum {0.0};
-  double maxsum {0.0}; 
+  double maxsum {0.0};
   int nTasks {_tasks.getSpecs().size()};
   for (auto t: _tasks.getSpecs())
   {
@@ -100,7 +105,7 @@ bool RMA::isSchedulable()
   }
   maxsum = nTasks * (pow(2.0, (1.0 / nTasks)) - 1);
   cout << "Sufficient schedulable? " << sum << " <= " << maxsum << endl;
-  
+
   return sum <= maxsum;
 }
 
@@ -115,7 +120,7 @@ void RMA::render()
       //cout << t.d << "  " << i * _tasks.minorframe() << endl;
       td += string(_tasks.minorframe(), '.');
       if ((i * _tasks.minorframe()) % t.d == 0)
-      {  
+      {
         td += "!";
       }
       else
