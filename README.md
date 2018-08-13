@@ -2,6 +2,7 @@ Scheduling
 =============
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4734232168984c6c88c3912860a651be)](https://www.codacy.com/project/josokw/Scheduling/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=josokw/Scheduling&amp;utm_campaign=Badge_Grade_Dashboard)
+[![CodeFactor](https://www.codefactor.io/repository/github/josokw/scheduling/badge)](https://www.codefactor.io/repository/github/josokw/scheduling)
 
 Console application implemented in C++. 
 
